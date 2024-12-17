@@ -1,0 +1,26 @@
+# Server
+server:
+  tomcat:
+    accept-count: 1000
+
+# Spring native
+spring:
+  application:
+    name: tcom
+  datasource:
+    url: jdbc:mysql://localhost:3306/tcomDb
+    username: root
+    password: 123456aA
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+
+  messages:
+    basename: messages
+    encoding: UTF-8
+    jackson:
+      time-zone: Asia/Ho_Chi_Minh
+      date-format: dd/MM/yyyy HH:mm:ss

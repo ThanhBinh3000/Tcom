@@ -57,7 +57,7 @@ function renderTree(data, container) {
         node.id = 'folder-child-'+item.id;
         node.innerHTML = `
                 ${item.children && item.children.length > 0
-            ? `<i class="fa fa-caret-right" onclick="toggleVisibility(${item.id})"></i>`
+            ? `<i class="fa fa-caret-right" id="folder-dir-${item.id}" onclick="toggleVisibility(${item.id})"></i>`
             : ''}
                 <i class="fa fa-folder" onclick="showFiles(${item.id})"></i>
                 ${item.name}
@@ -77,12 +77,17 @@ function renderTree(data, container) {
 function toggleVisibility(folderId) {
     var folder = document.getElementById('folder-'+folderId);
     if (folder) {
+        var dir = document.getElementById('folder-dir-'+folderId);
         if (folder.style.display === "none") {
             folder.style.display = "block";
             folder.classList.add("active");
+            dir.classList.remove("fa-angle-right");
+            dir.classList.add("fa-angle-down");
         } else {
             folder.style.display = "none";
             folder.classList.remove("active");
+            dir.classList.add("fa-angle-right");
+            dir.classList.remove("fa-angle-down");
         }
     }
 }

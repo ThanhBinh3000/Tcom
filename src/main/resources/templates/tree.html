@@ -73,15 +73,12 @@
 </head>
 <body>
 <script src="/folder-management.js"></script>
-<!--<script src="/folder.css"></script>-->
 <div class="container-fluid">
     <div class="row" style="margin-top:10px;">
         <div class="col-md-3" style="height: 98vh; overflow:scroll;">
-            <label><i class="fa fa-folder"></i> Folder</label>
+            <label id="folder-child-0"><i class="fa fa-folder" onclick="showFiles(0)"></i> Folder</label>
             <div id="folder-display">
-                <ul id="tree">
-                    <!--                    <li th:each="item : ${tree}" th:include="tree_node :: node(item=${item})"></li>-->
-                </ul>
+                <ul id="tree"></ul>
             </div>
         </div>
         <div class="col-md-9">
@@ -97,7 +94,7 @@
 
                 </div>
                 <div class="col-md-12" style="margin-top: 10px;background-color: #b8c2cb !important; height: 50px; padding: 1%;">
-                    <label id="currentPath">Folder</label>
+                    <label id="currentPath" >Folder</label>
                 </div>
                 <div id="file-list" class="col-md-12" style="margin-top: 10px;">
                     <table class="w-100 table">
@@ -114,6 +111,7 @@
                     <input type="text" id="idParent" style="display:none;" />
                     <input type="text" id="idFile" style="display:none;" />
                     <input type="text" id="idParentOld" style="display:none;" />
+                    <input type="text" id="idFileOld" style="display:none;" />
                 </div>
                 <div class="col-md-12" style=" position: fixed;left: 0;bottom: 10px;width: 100%;color: white;text-align: center;">
                     <footer id="footerId">

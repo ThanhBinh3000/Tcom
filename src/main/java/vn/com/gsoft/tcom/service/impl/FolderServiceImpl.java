@@ -42,13 +42,16 @@ public class FolderServiceImpl implements FolderService {
         }
         Folder parentFolder = hdrRepo.findById(idFolder).orElse(null);
         if (parentFolder == null) {
-            throw new Exception("Folder not found with id: " + idFolder);
+            parentFolder = new Folder();
+            List<Folder> folders = hdrRepo.findAllByIdFolderIsNull();
+            parentFolder.setChildren(folders);
+        }else {
+            buildPath(parentFolder);
+            List<Folder> subFolders = hdrRepo.findAllByIdFolder(idFolder);
+            List<File> files = dtlRepo.findAllByIdFolder(idFolder);
+            parentFolder.setChildren(subFolders);
+            parentFolder.setFiles(files);
         }
-        buildPath(parentFolder);
-        List<Folder> subFolders = hdrRepo.findAllByIdFolder(idFolder);
-        List<File> files = dtlRepo.findAllByIdFolder(idFolder);
-        parentFolder.setChildren(subFolders);
-        parentFolder.setFiles(files);
         return parentFolder;
     }
 

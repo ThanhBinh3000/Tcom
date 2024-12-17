@@ -10,7 +10,7 @@ function showFiles(folderId) {
             const fileDisplay = document.getElementById("file-display");
             fileDisplay.innerHTML = "";
             var folderParent = document.getElementById('folder-child-'+folderId);
-            folderParent.style.background = 'red';
+            folderParent.style.background = folderId == 0 ? 'none' : 'red';
             item.children.forEach(file => {
                 const row = document.createElement("tr");
                 const updatedOn = file.modified ? new Date(file.modified).toLocaleDateString('en-GB') : "N/A";
@@ -27,6 +27,7 @@ function showFiles(folderId) {
                 const row = document.createElement("tr");
                 const updatedOn = file.updated ? new Date(file.updated).toLocaleDateString('en-GB') : "N/A";
                 const createdDate = file.created ? new Date(file.created).toLocaleDateString('en-GB') : "N/A";
+                row.id = 'file-'+file.id;
                 row.innerHTML = `
                 <td onclick="showIdFile(${file.id})"><i class="fa fa-file" aria-hidden="true"></i> ${file.name}</td>
                 <td>${updatedOn}</td>
@@ -46,7 +47,17 @@ function showFiles(folderId) {
 }
 
 function showIdFile(idFile) {
+    document.getElementById("idFileOld").value = document.getElementById("idFile").value;
     document.getElementById("idFile").value = idFile;
+    var fileElement = document.getElementById('file-'+ idFile);
+    fileElement.style.background = 'green';
+    if(document.getElementById("idFileOld").value){
+        var fileElementOld = document.getElementById('file-'+document.getElementById("idFileOld").value);
+        if(fileElementOld){
+            fileElementOld.style.background = 'none';
+        }
+
+    }
 }
 
 function renderTree(data, container) {
